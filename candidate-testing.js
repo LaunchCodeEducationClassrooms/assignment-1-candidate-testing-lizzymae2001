@@ -8,7 +8,7 @@ let candidateName = '';
 let question = 'Who was the first American woman in space? ';
 let correctAnswer = 'Sally Ride';
 let candidateAnswer = '';
-let questions = ['Who was the first American woman in space? ', 'True or false: 5000 meters = 5 kilometers: ', '(5 + 3)/2*10= ', "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2?", "What is the minimum crew size for the ISS?"];
+let questions = ["Who was the first American woman in space? ", "True or false: 5000 meters = 5 kilometers. ", "(5 + 3)/2*10= ? ", "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ", "What is the minimum crew size for the ISS? "];
 let correctAnswers = ['Sally Ride', 'True', '40', 'Trajectory', '3'];
 let candidateAnswers = [];
 
@@ -21,21 +21,41 @@ candidateName = input.question('Enter your name: ')
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
   for (let i = 0; i < questions.length; i++) { 
-    candidateAnswers[i] = input.question(questions[1]);
+    candidateAnswers[i] = input.question(questions[i]); 
+  }
 }
+
 
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-  console.log(`You answered ${candidateAnswers[i]}, and the correct answer is ${correctAnswers[i]}`);
-  }
-
-
-  let grade;
   
+  let numberCorrect = 0
+  console.log(`Candidate name: ${candidateName}\n`);
+  for (let i = 0; i < questions.length; i++) {
+    if (candidateAnswers[i].toUpperCase() === correctAnswers[i].toUpperCase()){
+    numberCorrect ++
+    }
+    console.log(`${i+1}) ${questions[i]}
+    Your answer: ${candidateAnswers[i]}
+    Correct answer: ${correctAnswers[i]}` +'\n');
+    }
+  
+  
+  let grade = (numberCorrect/questions.length) * 100
+  console.log(`>>> Overall grade: ${grade}% (${numberCorrect} of ${questions.length} responses correct) <<<`);
 
-  return grade;
+  if(grade >= 80){
+    console.log(`>>> STATUS: PASSED <<<`);
+  } else {
+    console.log(`>>> STATUS: FAILED <<<`);
+  }
+return grade;
+
 }
+
+
+  
 
 function runProgram() {
   askForName();
